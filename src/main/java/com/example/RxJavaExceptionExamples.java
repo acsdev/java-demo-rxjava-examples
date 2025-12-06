@@ -1,5 +1,6 @@
 package com.example;
 
+import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Single;
 
@@ -23,12 +24,12 @@ public class RxJavaExceptionExamples {
 //        System.out.println();
 //        System.out.println();
 //        System.out.println("3. ====================");
-        example_DoOnError();
+//        example_DoOnError();
 //
 //        System.out.println();
 //        System.out.println();
 //        System.out.println("4. ====================");
-//        example_OnErrorResumeNext();
+        example_OnErrorResumeNext();
 //
 //        System.out.println();
 //        System.out.println();
@@ -128,6 +129,8 @@ public class RxJavaExceptionExamples {
                 .onErrorResumeNext(error -> {
                     System.out.println("==> Error detected, using fallback: " + error.getMessage());
                     return fallbackData;
+                    // TO FINISH THE PROCESS, use a fallback that represents an error
+                    // return Observable.error(new RuntimeException("DONE"));
                 })
                 .subscribe(
                         item -> System.out.println("==> Item: " + item),
