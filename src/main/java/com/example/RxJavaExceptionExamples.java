@@ -4,44 +4,47 @@ import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Single;
 
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 
+@SuppressWarnings("ResultOfMethodCallIgnored")
 public class RxJavaExceptionExamples {
 
     public static void main(String[] args) {
-        System.out.println();
-        System.out.println();
-        System.out.println("1. ====================");
-        example_OnErrorReturn();
-
-        System.out.println();
-        System.out.println();
-        System.out.println("2. ====================");
-        example_OnErrorReturnItem();
-
-        System.out.println();
-        System.out.println();
-        System.out.println("3. ====================");
+//        System.out.println();
+//        System.out.println();
+//        System.out.println("1. ====================");
+//        example_OnErrorReturn();
+//
+//        System.out.println();
+//        System.out.println();
+//        System.out.println("2. ====================");
+//        example_OnErrorReturnItem();
+//
+//        System.out.println();
+//        System.out.println();
+//        System.out.println("3. ====================");
         example_DoOnError();
+//
+//        System.out.println();
+//        System.out.println();
+//        System.out.println("4. ====================");
+//        example_OnErrorResumeNext();
+//
+//        System.out.println();
+//        System.out.println();
+//        System.out.println("5. ====================");
+//        example_Retry();
+//
+//        System.out.println();
+//        System.out.println();
+//        System.out.println("6. ====================");
+//        example_Retry_WithSingle();
+//
+//        System.out.println();
+//        System.out.println();
+//        System.out.println("7. ===================");
+//        example_Continue_flow();
 
-        System.out.println();
-        System.out.println();
-        System.out.println("4. ====================");
-        example_OnErrorResumeNext();
-
-        System.out.println();
-        System.out.println();
-        System.out.println("5. ====================");
-        example_Retry();
-
-        System.out.println();
-        System.out.println();
-        System.out.println("6. ====================");
-        example_Retry_WithSingle();
-
-        System.out.println();
-        System.out.println();
-        System.out.println("7. ===================");
-        example_Continue_flow();
     }
 
     /**
@@ -59,7 +62,7 @@ public class RxJavaExceptionExamples {
                         result -> System.out.println("==> Result: " + result),
                         error -> System.out.println("==> Unhandled error: " + error),
                         () -> System.out.println("==> Complete!")
-                ).dispose();
+                );
     }
 
     /**
@@ -80,7 +83,7 @@ public class RxJavaExceptionExamples {
                         result -> System.out.println("==> Result: " + result),
                         error -> System.out.println("==> Error: " + error),
                         () -> System.out.println("==> Complete!")
-                ).dispose();
+                );
 
         System.out.println();
     }
@@ -104,7 +107,7 @@ public class RxJavaExceptionExamples {
                         result -> System.out.println("==> Result: " + result),
                         error -> System.out.println("==> Final error: " + error),
                         () -> System.out.println("==> Complete!")
-                ).dispose();
+                );
     }
 
     /**
@@ -130,7 +133,7 @@ public class RxJavaExceptionExamples {
                         item -> System.out.println("==> Item: " + item),
                         error -> System.out.println("==> Error: " + error),
                         () -> System.out.println("==> Complete!")
-                ).dispose();
+                );
     }
 
     /**
@@ -156,7 +159,7 @@ public class RxJavaExceptionExamples {
                         result -> System.out.println("==> " + result),
                         error -> System.out.println("==> Error after retries: " + error),
                         () -> System.out.println("==> Complete! With:" + executions.get() + "Executions")
-                ).dispose();
+                );
 
         // Scenario
         // For items to emit, but the fail occurs on the third (in the first try)
@@ -177,7 +180,7 @@ public class RxJavaExceptionExamples {
                         result -> System.out.println("==> " + result),
                         error -> System.out.println("==> Error after retries: " + error),
                         () -> System.out.println("==> Complete! With:" + executions2.get() + "Executions")
-                ).dispose();
+                );
 
     }
 
@@ -200,7 +203,7 @@ public class RxJavaExceptionExamples {
                         result -> System.out.println("==> Finish "),
                         error -> System.out.println("==> Error after retries '" + attempt1.get() + "' : " + error)
 
-                ).dispose();
+                );
 
         // Retries and EVENTUALLY succeed
         AtomicInteger attempt2 = new AtomicInteger(0);
@@ -217,7 +220,7 @@ public class RxJavaExceptionExamples {
                         result -> System.out.println("==> Finish with result '" + result + "' number of tries: '" + attempt2.get() + "'"),
                         error -> System.out.println("==> Error after retries: " + error)
 
-                ).dispose();
+                );
 
     }
 
@@ -242,7 +245,6 @@ public class RxJavaExceptionExamples {
                         result -> System.out.println("==> " + result),
                         error -> System.out.println("==> Error after retries: " + error),
                         () -> System.out.println("==> Complete!")
-                ).dispose();
+                );
     }
-
 }
